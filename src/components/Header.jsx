@@ -1,32 +1,47 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useState } from 'react';
 
 function Header() {
     const location = useLocation();
-    const { cart, cartCount, cartTotal } = useCart(); // Accedemos a todos los datos necesarios
+    const { cart, cartCount, cartTotal } = useCart();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+    const closeMenu = () => setIsMenuOpen(false);
 
     return (
         <header className="main-header">
             <div className="container header-content">
-                <Link to="/" className="logo">
+                <Link to="/" className="logo" onClick={closeMenu}>
                     <img src="/img/logo.svg" alt="Cafetería Logo" />
                 </Link>
 
-                <nav className="main-nav">
-                    <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Inicio</Link>
-                    <Link to="/nosotros" className={location.pathname === '/nosotros' ? 'active' : ''}>Nosotros</Link>
-                    <Link to="/proceso" className={location.pathname === '/proceso' ? 'active' : ''}>Proceso</Link>
-                    <Link to="/menu" className={location.pathname === '/menu' ? 'active' : ''}>Menú</Link>
-                    <Link to="/galeria" className={location.pathname === '/galeria' ? 'active' : ''}>Galería</Link>
-                    <Link to="/contacto" className={location.pathname === '/contacto' ? 'active' : ''}>Contacto</Link>
+                <button
+                    className={`hamburger-btn ${isMenuOpen ? 'open' : ''}`}
+                    onClick={toggleMenu}
+                    aria-label="Menú"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav className={`main-nav ${isMenuOpen ? 'active' : ''}`}>
+                    <Link to="/" className={location.pathname === '/' ? 'active' : ''} onClick={closeMenu}>Inicio</Link>
+                    <Link to="/nosotros" className={location.pathname === '/nosotros' ? 'active' : ''} onClick={closeMenu}>Nosotros</Link>
+                    <Link to="/proceso" className={location.pathname === '/proceso' ? 'active' : ''} onClick={closeMenu}>Proceso</Link>
+                    <Link to="/menu" className={location.pathname === '/menu' ? 'active' : ''} onClick={closeMenu}>Menú</Link>
+                    <Link to="/galeria" className={location.pathname === '/galeria' ? 'active' : ''} onClick={closeMenu}>Galería</Link>
+                    <Link to="/contacto" className={location.pathname === '/contacto' ? 'active' : ''} onClick={closeMenu}>Contacto</Link>
 
                     <div className="cart-dropdown-container">
-                        <Link to="/carrito" className="btn-cart-icon" aria-label="Carrito" style={{ display: 'flex' }}>
+                        <Link to="/carrito" className="btn-cart-icon" aria-label="Carrito" style={{ display: 'flex' }} onClick={closeMenu}>
                             🛒
                             {cartCount > 0 && <span className="badge">{cartCount}</span>}
                         </Link>
 
-                        {/* MINI CART POPOVER (Hover) */}
+                        {/* MINI CART POPOVER (Hover) - Solo visible en desktop o cuando no es móvil para simplificar */}
                         <div className="mini-cart-popup">
                             <div className="mini-cart-header">Tu Carrito ({cartCount})</div>
 
@@ -37,7 +52,6 @@ function Header() {
                                     <div className="mini-cart-items">
                                         {cart.map(item => (
                                             <div key={item.id} className="mini-cart-item">
-                                                {/* Placeholder para imagen mini si la tuviéramos, si no un cuadro gris o el icono */}
                                                 <div style={{ width: '50px', height: '50px', backgroundColor: '#f0f0f0', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ccc', fontSize: '2rem' }}>
                                                     ☕
                                                 </div>
@@ -54,7 +68,7 @@ function Header() {
                                         <span>Total:</span>
                                         <span>${cartTotal}</span>
                                     </div>
-                                    <Link to="/carrito" className="btn btn-primary" style={{ width: '100%', fontSize: '1.2rem', padding: '0.8rem', textAlign: 'center' }}>
+                                    <Link to="/carrito" className="btn btn-primary" style={{ width: '100%', fontSize: '1.2rem', padding: '0.8rem', textAlign: 'center' }} onClick={closeMenu}>
                                         Ir a Pagar
                                     </Link>
                                 </>

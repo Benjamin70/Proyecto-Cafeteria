@@ -39,15 +39,15 @@ function CartPage() {
                                     <tbody>
                                         {cart.map(item => (
                                             <tr key={item.id} style={{ borderBottom: '1px solid #eee' }}>
-                                                <td style={{ padding: '2rem 1rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                                                <td data-label="Producto" style={{ padding: '2rem 1rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
                                                     {/* Placeholder image logic if needed, but assuming no image prop in cart item for now implies text only or generic */}
                                                     <div>
                                                         <h4 style={{ margin: 0, color: 'var(--primary-dark)' }}>{item.nombre}</h4>
                                                     </div>
                                                 </td>
-                                                <td style={{ padding: '1rem', fontWeight: 'bold' }}>${item.precio}</td>
-                                                <td style={{ padding: '1rem' }}>
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                <td data-label="Precio" style={{ padding: '1rem', fontWeight: 'bold' }}>${item.precio}</td>
+                                                <td data-label="Cantidad" style={{ padding: '1rem' }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'flex-end' }}>
                                                         <button
                                                             className="btn-qty"
                                                             onClick={() => updateQuantity(item.id, -1)}
@@ -59,10 +59,10 @@ function CartPage() {
                                                         >+</button>
                                                     </div>
                                                 </td>
-                                                <td style={{ padding: '1rem', color: 'var(--accent)', fontWeight: 'bold' }}>
+                                                <td data-label="Subtotal" style={{ padding: '1rem', color: 'var(--accent)', fontWeight: 'bold' }}>
                                                     ${item.precio * item.quantity}
                                                 </td>
-                                                <td style={{ padding: '1rem' }}>
+                                                <td data-label="" style={{ padding: '1rem' }}>
                                                     <button
                                                         className="btn-trash"
                                                         onClick={() => removeFromCart(item.id)}

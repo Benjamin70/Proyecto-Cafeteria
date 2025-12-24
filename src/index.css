@@ -206,6 +206,93 @@ h3 {
     color: var(--secondary);
 }
 
+/* --- HAMBURGER BUTTON (Mobile Only) --- */
+.hamburger-btn {
+    display: none;
+    /* Oculto en desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    /* Encima del menú overlay */
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+/* Animación a X cuando está abierto */
+.hamburger-btn.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* --- RESPONSIVE MENU (Mobile/Tablet < 1024px) --- */
+@media (max-width: 1024px) {
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Oculto por defecto */
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background-color: var(--primary-dark);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        transition: right 0.4s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+    .main-nav.active {
+        right: 0;
+        /* Mostrar */
+    }
+
+    .main-nav a {
+        font-size: 2.2rem;
+        color: white;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Ajustar posición del carrito dentro del menú móvil */
+    .cart-dropdown-container {
+        margin-top: 2rem;
+    }
+
+    /* Desactivar popup hover en móvil */
+    .mini-cart-popup {
+        display: none !important;
+    }
+}
+
 /* --- HERO SECTION --- */
 .hero {
     height: 85vh;
@@ -571,4 +658,109 @@ h3 {
     font-weight: 700;
     color: var(--primary-dark);
     font-size: 1.4rem;
+}
+
+/* --- RESPONSIVE CART PAGE --- */
+@media (max-width: 768px) {
+    .cart-grid-layout {
+        display: block !important;
+        /* Stack columns */
+    }
+
+    .cart-summary {
+        margin-top: 3rem;
+        position: static !important;
+        /* No sticky on mobile */
+    }
+
+    /* Transform Table to Cards */
+    .cart-list table,
+    .cart-list thead,
+    .cart-list tbody,
+    .cart-list th,
+    .cart-list td,
+    .cart-list tr {
+        display: block;
+    }
+
+    .cart-list thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .cart-list tr {
+        border: 1px solid #eee;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .cart-list td {
+        border: none;
+        position: relative;
+        padding-left: 0 !important;
+        text-align: right;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .cart-list td::before {
+        /* Label for accessibility/context */
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--primary-dark);
+        text-align: left;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+}
+
+/* --- GLOBAL MOBILE ADJUSTMENTS (Final Polish) --- */
+@media (max-width: 576px) {
+
+    /* Ajustes generales para pantallas muy pequeñas */
+    html {
+        font-size: 55%;
+        /* Reducir ligeramente base font size */
+    }
+
+    .section-padding {
+        padding: 4rem 0;
+        /* Menos padding vertical */
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    .hero-content {
+        padding: 0 1.5rem;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    /* Ajuste para grids en móviles muy estrechos */
+    .grid-auto-fit {
+        grid-template-columns: 1fr;
+        /* Una sola columna */
+        gap: 3rem;
+    }
+
+    .footer-grid {
+        text-align: center;
+        gap: 3rem;
+        grid-template-columns: 1fr;
+    }
 }
