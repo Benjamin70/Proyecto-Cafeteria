@@ -1,27 +1,29 @@
 {
-  "name": "cafeteria",
-  "version": "1.0.0",
-  "description": "Aprendiendo SASS, Gulp, CSS grid",
-  "main": "index.js",
+  "name": "temp_vite_app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "author": "Benjamin Bencosme Dev",
-  "license": "ISC",
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.11.0",
+    "yet-another-react-lightbox": "^3.28.0"
+  },
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "cssnano": "^6.0.1",
-    "gulp": "^4.0.2",
-    "gulp-avif": "^1.1.1",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-postcss": "^9.0.1",
-    "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-webp": "^4.0.1",
-    "sass": "^1.63.6"
-  },
-  "browserslist": [
-    "last 1 version",
-    ">1%"
-  ]
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.2.4"
+  }
 }
